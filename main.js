@@ -1,2 +1,3 @@
-import './style.css'
+import './styles.css'
+import "./src/components/nav/nav.js"
 
