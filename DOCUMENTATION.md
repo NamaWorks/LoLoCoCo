@@ -2,20 +2,29 @@
 
 Imágenes usadas -> ./assets
 
-## HTML 
-
-### NAV
-Dentro del Nav encontramos un ul con los elementos que componen la barra de navegación de la página
+## HTML
 
 ## CSS
+
 El CSS se ha dividido en diferentes partes:
 
 - ./styles.css
-    
-    En este documento podremos encontrar los estilos generales del proyecto.
+
+  - Fuentes importadas desde Google Fonts
+  - Estilos generales (variables de CSS)
+  - Estilos que se apliquen a todos los elementos, así como a la etiqueta HTML
 
 - ./src/components/nav/nav.css
 
-    En este documento encontraremos los estilos del nav
+  - Estilos de la barra de navegación
 
-- 
+- ./src/components/nav/body-main.css
+  - Los estilos del main dentro del body
+    - Estilos del timeline de imágenes
+    - Estilos del show more
+
+## JS
+
+- ./main.js
+
+  - Imports específicos de cada sección, tanto CSS como JS

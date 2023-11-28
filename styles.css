@@ -1,9 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Code+Latin:wght@100;200;300;400;500;600;700&display=swap');
+
 :root {
-  --margin : 10px;
+  --LLCC-gap-00: 1rem;
+  --LLCC-gap-01: 5rem;
+  --LLCC-margin-general: 2rem;
+  /* COLORS */
+  --LLCC-white: #ffffff;
+  --LLCC-black: #000000;
+  --LLCC-red: #ff5252;
+  /* TEXTS */
+  --LLCC-logo-size: 2rem;
+  --LLCC-p-size: 1.2rem;
+  --LLCC-p-weight: 400;
+  --LLCC-title-weight: 800;
+  --LLCC-subtitle-weight: 600;
+  /* HEADERS */
+  --LLCC-header-1-size: 4rem;
+  --LLCC-header-2-size: 3rem;
+}
+
+html {
+  margin: var(--LLCC-margin-general);
+  background-color: var(--LLCC-white);
 }
 
 * {
   margin: 0;
   box-sizing: border-box;
   padding: 0;
+  font-family: 'M PLUS Code Latin', monospace;
+}
+
+a {
+  color: var(--LLCC-black);
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+}
+
+p,
+a {
+  font-size: var(--LLCC-p-size);
+  font-weight: var(--LLCC-p-weight);
 }

@@ -1,1 +1,40 @@
-#nav-list
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#nav-list {
+  width: 100%;
+  display: flex;
+  list-style: none;
+  gap: var(--LLCC-gap-01);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--LLCC-margin-general);
+  color: var(--LLCC-black);
+}
+
+#logo {
+  font-size: var(--LLCC-logo-size);
+  font-weight: var(--LLCC-title-weight);
+  line-height: 1.75rem;
+  color: var(--LLCC-red);
+}
+
+#nav-element img {
+  height: 50px;
+}
+
+#search-bar input {
+  padding: 20px;
+  border: 1px solid var(--LLCC-red);
+  border-radius: 0;
+}
+
+.nav-button {
+  width: 35px;
+  background-color: transparent;
+  border: 0px black solid;
+  cursor: pointer;
+}
