@@ -31,9 +31,17 @@ html {
   font-family: 'M PLUS Code Latin', monospace;
 }
 
+*::selection {
+  /* background-color: var(--LLCC-red); */
+  color: var(--LLCC-red);
+  text-decoration: underline;
+  text-decoration-color: var(--LLCC-red);
+}
+
 a {
   color: var(--LLCC-black);
   text-decoration: none;
+  border-radius: 10px;
 }
 
 img {
@@ -44,4 +52,8 @@ p,
 a {
   font-size: var(--LLCC-p-size);
   font-weight: var(--LLCC-p-weight);
+}
+
+label {
+  display: none;
 }
