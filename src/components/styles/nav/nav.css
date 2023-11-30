@@ -28,7 +28,7 @@ nav {
 
 #search-bar input {
   padding: 20px;
-  border: 1px solid var(--LLCC-red);
+  border: 2px solid var(--LLCC-red);
   border-radius: 0;
 }
 

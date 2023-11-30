@@ -28,3 +28,8 @@ El CSS se ha dividido en diferentes partes:
 - ./main.js
 
   - Imports específicos de cada sección, tanto CSS como JS
+
+## API
+
+![Alt text](src/assets/img/image.png)
+![Alt text](src/assets/img/image2.png)
