@@ -4,10 +4,26 @@ import './src/components/styles/body-main/body-main.css'
 import './src/components/styles/body-main/show-more-button.css'
 import './src/components/styles/footer/footer.css'
 
-const mainRoute = 'https://api.unsplash.com/'
+const mainRoute = 'https://api.unsplash.com/search/'
 const applicationId = '534651'
 const secretKey = 'HLajwDcwMz81sQQf8U_VQtNs3hfZHGaAWmQCmtCynsg'
 const accessKey = 'n7epUiJjY2BrSI7FW1oJ33wh7q4XI7lsZZlxCBwRg3o'
+
+// const applicationId = '536295'
+// const secretKey = '9ke0AuwAkaHhBTXT21LgYy8ySi6cbF215Of87SO_UeE'
+// const accessKey = 'LY--xt4bz0EospbEjKv3dsmPlpnOx2SJKVktynfm56g'
+
+const searchInput = document.querySelector('#search-input')
+
+const handleEnter = (e) => {
+  if (e.keyCode === 13) {
+    fetchImages(e.target.value)
+  }
+}
+searchInput.addEventListener('keyup', handleEnter)
+searchInput.addEventListener('blur', (e) => {
+  fetchImages(e.target.value)
+})
 
 const printImage = (image) => {
   const picturesTimeline = document.querySelector('#pictures-timeline')
@@ -44,7 +60,7 @@ const resetPicturesTl = () => {
   picturesTimeline.innerHTML = ''
 }
 
-const fetchImages = (query, n = 10) => {
+const fetchImages = async (query, n = 10) => {
   resetPicturesTl()
   console.log(query)
   fetch(
@@ -52,31 +68,13 @@ const fetchImages = (query, n = 10) => {
   )
     .then((res) => res.json())
     .then((res) => {
-      res.forEach((img) => {
-        console.log(img)
-        printImage(img)
+      console.log(res)
+      let resultsArray = res.results
+      resultsArray.forEach((result) => {
+        console.log(result)
+        printImage(result)
       })
     })
     .catch((error) => console.log(`Fetch failed, check code`))
 }
 fetchImages('')
-
-const getImagesBytag = (n = 10) => {
-  let searchInput = document.querySelector('#search-input')
-  let searchInputValue = searchInput.value
-  searchInput.addEventListener('blur', (e) => fetchImages(e, n))
-}
-getImagesBytag()
-
-// const fetchImagesAsyncAwait = async (query, n = 10) => {
-//   try {
-//     const response = fetch(
-//       `${mainRoute}photos?query=${query}&per_page=${n}&client_id=${accessKey}`
-//     )
-//     const res = response.json()
-//   } catch (error) {
-//     console.log(`Fetch failed, check error code`)
-//   } finally {
-//     console.log(`This function has finished`)
-//   }
-// }
