@@ -9,21 +9,21 @@ const applicationId = '534651'
 const secretKey = 'HLajwDcwMz81sQQf8U_VQtNs3hfZHGaAWmQCmtCynsg'
 const accessKey = 'n7epUiJjY2BrSI7FW1oJ33wh7q4XI7lsZZlxCBwRg3o'
 
-// const applicationId = '536295'
-// const secretKey = '9ke0AuwAkaHhBTXT21LgYy8ySi6cbF215Of87SO_UeE'
-// const accessKey = 'LY--xt4bz0EospbEjKv3dsmPlpnOx2SJKVktynfm56g'
-
 const searchInput = document.querySelector('#search-input')
+const picturesTimeline = document.querySelector('#pictures-timeline')
 
 const handleEnter = (e) => {
   if (e.keyCode === 13) {
-    fetchImages(e.target.value)
+    resetTl()
+    resetPageNumber()
+    if (e.target.value) {
+      fetchImages(e.target.value)
+    } else {
+      fetchImages('latest')
+    }
   }
 }
 searchInput.addEventListener('keyup', handleEnter)
-searchInput.addEventListener('blur', (e) => {
-  fetchImages(e.target.value)
-})
 
 const printImage = (image) => {
   const picturesTimeline = document.querySelector('#pictures-timeline')
@@ -47,6 +47,13 @@ const printImage = (image) => {
   p.innerText = image.alt_description
   // p.innerText = 'Descripción'
 
+  let randomNumber = getRandomInteger(1, 8)
+  // console.log(randomNumber)
+
+  if (randomNumber <= 4) {
+    individualEntry.classList.add('big-flex')
+  }
+
   picturesTimeline.append(individualEntry)
   individualEntry.append(entryPicture)
   individualEntry.append(entryText)
@@ -55,26 +62,45 @@ const printImage = (image) => {
   entryText.append(p)
 }
 
-const resetPicturesTl = () => {
-  const picturesTimeline = document.querySelector('#pictures-timeline')
+const resetTl = () => {
   picturesTimeline.innerHTML = ''
 }
-
-const fetchImages = async (query, n = 10) => {
-  resetPicturesTl()
+const resetPageNumber = () => {
+  pageNumber = 1
+}
+let pageNumber = 1
+const fetchImages = async (query = 'latest', n = 20, pageNumber) => {
   console.log(query)
   fetch(
-    `${mainRoute}photos?query=${query}&per_page=${n}&client_id=${accessKey}`
+    `${mainRoute}photos?query=${query}&page=${pageNumber}&per_page=${n}&client_id=${accessKey}`
   )
     .then((res) => res.json())
     .then((res) => {
-      console.log(res)
+      // console.log(res)
       let resultsArray = res.results
       resultsArray.forEach((result) => {
-        console.log(result)
+        // console.log(result)
         printImage(result)
       })
+      // funciones de recursividad -> recursive function
     })
     .catch((error) => console.log(`Fetch failed, check code`))
 }
-fetchImages('')
+fetchImages('latest')
+
+const addTenMorePictures = () => {
+  pageNumber++
+  if (searchInput.value) {
+    fetchImages(searchInput.value, 10, pageNumber)
+  } else {
+    fetchImages('latest', 10, pageNumber)
+  }
+}
+const showMoreButton = document.querySelector('#show-more-button')
+showMoreButton.addEventListener('click', addTenMorePictures)
+
+const getRandomInteger = (min, max) => {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
