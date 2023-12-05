@@ -31,35 +31,41 @@ const printImage = (image) => {
   let individualEntry = document.createElement('div')
   individualEntry.className = 'individual-entry'
 
+  let entryMask = document.createElement('div')
+  entryMask.classList.add('entry-mask')
   let entryPicture = document.createElement('div')
   entryPicture.classList.add('entry-div', 'entry-picture')
   let imageTag = document.createElement('img')
   imageTag.src = image.urls.regular
-  // imageTag.src = './src/assets/img/image.png'
   imageTag.alt = image.alt_description
 
   let entryText = document.createElement('div')
   entryText.classList.add('entry-div', 'entry-text')
-  let h2 = document.createElement('h2')
-  h2.innerText = 'id: ' + image.id
-  // h2.innerText = 'id: '
-  let p = document.createElement('p')
-  p.innerText = image.alt_description
-  // p.innerText = 'Descripción'
+  let userImageDiv = document.createElement('div')
+  userImageDiv.classList.add('user-image-div')
+  let userImage = document.createElement('img')
+  userImage.src = image.user.profile_image.medium
+  userImage.classList.add('user-image')
+  // userImage.href = image.user.social.portfolio_url
+  let pUser = document.createElement('p')
+  pUser.innerText = image.user.name
+  // let p = document.createElement('p')
+  // p.innerText = image.alt_description
 
   let randomNumber = getRandomInteger(1, 8)
-  // console.log(randomNumber)
-
   if (randomNumber <= 4) {
     individualEntry.classList.add('big-flex')
   }
 
   picturesTimeline.append(individualEntry)
   individualEntry.append(entryPicture)
+  individualEntry.append(entryMask)
   individualEntry.append(entryText)
   entryPicture.append(imageTag)
-  entryText.append(h2)
-  entryText.append(p)
+  entryText.append(userImageDiv)
+  userImageDiv.append(userImage)
+  entryText.append(pUser)
+  // entryText.append(p)
 }
 
 const resetTl = () => {
@@ -69,7 +75,7 @@ const resetPageNumber = () => {
   pageNumber = 1
 }
 let pageNumber = 1
-const fetchImages = async (query = 'latest', n = 20, pageNumber) => {
+const fetchImages = async (query = 'pattern', n = 10, pageNumber) => {
   console.log(query)
   fetch(
     `${mainRoute}photos?query=${query}&page=${pageNumber}&per_page=${n}&client_id=${accessKey}`
@@ -86,14 +92,14 @@ const fetchImages = async (query = 'latest', n = 20, pageNumber) => {
     })
     .catch((error) => console.log(`Fetch failed, check code`))
 }
-fetchImages('latest')
+fetchImages('pattern')
 
 const addTenMorePictures = () => {
   pageNumber++
   if (searchInput.value) {
     fetchImages(searchInput.value, 10, pageNumber)
   } else {
-    fetchImages('latest', 10, pageNumber)
+    fetchImages('pattern', 10, pageNumber)
   }
 }
 const showMoreButton = document.querySelector('#show-more-button')

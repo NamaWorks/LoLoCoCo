@@ -16,7 +16,9 @@
   --LLCC-subtitle-weight: 600;
   /* HEADERS */
   --LLCC-header-1-size: 4rem;
-  --LLCC-header-2-size: 3rem;
+  --LLCC-header-2-size: 2rem;
+  /* ANIMATION */
+  --LLCC-transition-01: .2s ease-in-out;
 }
 
 html {
