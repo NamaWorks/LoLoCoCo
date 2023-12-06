@@ -3,6 +3,7 @@ import './src/components/styles/nav/nav.css'
 import './src/components/styles/body-main/body-main.css'
 import './src/components/styles/body-main/show-more-button.css'
 import './src/components/styles/footer/footer.css'
+import './src/components/styles/body-main/filters.css'
 
 const mainRoute = 'https://api.unsplash.com/search/'
 const applicationId = '534651'
@@ -19,7 +20,7 @@ const handleEnter = (e) => {
     if (e.target.value) {
       fetchImages(e.target.value)
     } else {
-      fetchImages('latest')
+      fetchImages('coral color')
     }
   }
 }
@@ -31,8 +32,6 @@ const printImage = (image) => {
   let individualEntry = document.createElement('div')
   individualEntry.className = 'individual-entry'
 
-  let entryMask = document.createElement('div')
-  entryMask.classList.add('entry-mask')
   let entryPicture = document.createElement('div')
   entryPicture.classList.add('entry-div', 'entry-picture')
   let imageTag = document.createElement('img')
@@ -47,8 +46,10 @@ const printImage = (image) => {
   userImage.src = image.user.profile_image.medium
   userImage.classList.add('user-image')
   // userImage.href = image.user.social.portfolio_url
-  let pUser = document.createElement('p')
+  let pUser = document.createElement('a')
   pUser.innerText = image.user.name
+  pUser.href = image.user.social.portfolio_url
+  pUser.target = '_blank'
   // let p = document.createElement('p')
   // p.innerText = image.alt_description
 
@@ -59,7 +60,6 @@ const printImage = (image) => {
 
   picturesTimeline.append(individualEntry)
   individualEntry.append(entryPicture)
-  individualEntry.append(entryMask)
   individualEntry.append(entryText)
   entryPicture.append(imageTag)
   entryText.append(userImageDiv)
@@ -75,7 +75,7 @@ const resetPageNumber = () => {
   pageNumber = 1
 }
 let pageNumber = 1
-const fetchImages = async (query = 'pattern', n = 10, pageNumber) => {
+const fetchImages = async (query = 'coral color', n = 10, pageNumber) => {
   console.log(query)
   fetch(
     `${mainRoute}photos?query=${query}&page=${pageNumber}&per_page=${n}&client_id=${accessKey}`
@@ -92,14 +92,14 @@ const fetchImages = async (query = 'pattern', n = 10, pageNumber) => {
     })
     .catch((error) => console.log(`Fetch failed, check code`))
 }
-fetchImages('pattern')
+fetchImages('coral color')
 
 const addTenMorePictures = () => {
   pageNumber++
   if (searchInput.value) {
     fetchImages(searchInput.value, 10, pageNumber)
   } else {
-    fetchImages('pattern', 10, pageNumber)
+    fetchImages('coral color', 10, pageNumber)
   }
 }
 const showMoreButton = document.querySelector('#show-more-button')
@@ -110,3 +110,73 @@ const getRandomInteger = (min, max) => {
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
+
+const filterCategories = ['colors', 'orientation', 'sort by']
+const selectsSection = document.querySelector('#selects-section')
+const colors = [
+  'black_and_white',
+  'black',
+  'white',
+  'yellow',
+  'orange',
+  'red',
+  'purple',
+  'magenta',
+  'green',
+  'teal',
+  'blue'
+]
+const orientation = ['landscape', 'portrait', 'squarish']
+const sortBy = ['relevant', 'latest']
+const printFilterCategories = (category, catOptions) => {
+  let selectsSection = document.querySelector('#selects-section')
+
+  let selectFilterContainer = document.createElement('div')
+  selectFilterContainer.classList.add('div')
+  selectFilterContainer.classList.add('select-filter-container')
+  selectsSection.append(selectFilterContainer)
+
+  let filterSelect = document.createElement('div')
+  filterSelect.classList.add('filter-select')
+  filterSelect.setAttribute = ('id', `${category}-select`)
+  selectFilterContainer.append(filterSelect)
+
+  let categoryFilter = document.createElement('button')
+  categoryFilter.classList.add('category-filter')
+  categoryFilter.innerText = category
+  filterSelect.append(categoryFilter)
+
+  let chevronIcon = document.createElement('img')
+  chevronIcon.src = './src/assets/img/chevron.svg'
+  chevronIcon.alt = 'Chevron'
+  chevronIcon.classList.add('chevron-icon')
+  categoryFilter.append(chevronIcon)
+
+  let selectOptionsDiv = document.createElement('div')
+  selectOptionsDiv.classList.add('select-options-div')
+  selectFilterContainer.append(selectOptionsDiv)
+
+  catOptions.forEach((option) => {
+    let selectOpt = document.createElement('div')
+    selectOpt.classList.add('select-opt')
+    selectOptionsDiv.append(selectOpt)
+
+    let selectOptButton = document.createElement('button')
+    selectOptButton.classList.add('select-opt-button')
+    selectOptButton.innerText = option
+    selectOpt.append(selectOptButton)
+  })
+}
+
+printFilterCategories('Colors', colors)
+printFilterCategories('Orientation', orientation)
+printFilterCategories('Sort', sortBy)
+
+const emojiArr = ['❤️', '🟥', '🔴', '☎️', '🎈', '📕', '🏮', '🩸', '❤️']
+const printRandomEmoji = (a, b) => {
+  let randomI = getRandomInteger(a, b)
+  let randomEmoji = emojiArr[randomI]
+  const endEmoji = document.querySelector('#end-emoji')
+  endEmoji.innerText = randomEmoji
+}
+printRandomEmoji(0, 8)

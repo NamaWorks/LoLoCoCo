@@ -3,7 +3,11 @@
 :root {
   --LLCC-gap-00: 0.5rem;
   --LLCC-gap-01: 5rem;
+  --LLCC-gap-02: 10rem;
+  --LLCC-padding-01: 10px;
+  --LLCC-padding-selects-section: 25px 10svw;
   --LLCC-margin-general: 2rem;
+  --LLCC-margin-small: 1rem;
   /* COLORS */
   --LLCC-white: #ffffff;
   --LLCC-black: #000000;
@@ -18,7 +22,7 @@
   --LLCC-header-1-size: 4rem;
   --LLCC-header-2-size: 2rem;
   /* ANIMATION */
-  --LLCC-transition-01: .2s ease-in-out;
+  --LLCC-transition-01: 0.2s cubic-bezier(0, .11, .29, .95)
 }
 
 html {

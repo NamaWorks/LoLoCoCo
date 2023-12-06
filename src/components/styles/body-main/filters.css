@@ -1,0 +1,59 @@
+#filters {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--LLCC-red);
+  padding: var(--LLCC-padding-01);
+}
+
+#open-filters-button,
+.category-filter {
+  padding: var(--LLCC-padding-01);
+  gap: 80px;
+  align-items: center;
+  border: transparent;
+  background-color: transparent;
+  color: var(--LLCC-white);
+  display: flex;
+  border-bottom: 1px solid var(--LLCC-white);
+  filter: invert(0);
+  transition: var(--LLCC-transition-01);
+}
+
+#open-filters-button:hover,
+.category-filter:hover {
+  /* color: var(--LLCC-black); */
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.chevron-icon {
+  width: .5rem;
+}
+
+#selects-section {
+  display: flex;
+  flex-direction: row;
+  /* padding: var(--LLCC-padding-selects-section); */
+  justify-content: left;
+  /* gap: var(--LLCC-gap-02); */
+}
+
+.select-options-div {
+  width: 100%;
+}
+
+.select-opt-button {
+  width: 100%;
+  text-align: left;
+  background-color: var(--LLCC-white);
+  border: 1px solid var(--LLCC-red);
+  color: var(--LLCC-red);
+  padding: var(--LLCC-padding-01);
+  cursor: pointer;
+  transition: var(--LLCC-transition-01);
+}
+
+.select-opt-button:hover {
+  color: var(--LLCC-black);
+}
