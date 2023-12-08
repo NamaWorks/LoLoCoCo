@@ -4,6 +4,7 @@
   flex-direction: column;
   background-color: var(--LLCC-red);
   padding: var(--LLCC-padding-01);
+  transition: var(--LLCC-transition-01);
 }
 
 #open-filters-button,
@@ -29,18 +30,44 @@
 
 .chevron-icon {
   width: .5rem;
+  transform: rotate(0deg);
+  transition: var(--LLCC-transition-01);
+}
+
+.chevron-rotation {
+  transform: rotate(-180deg);
 }
 
 #selects-section {
   display: flex;
   flex-direction: row;
+  height: 0;
   /* padding: var(--LLCC-padding-selects-section); */
   justify-content: left;
   /* gap: var(--LLCC-gap-02); */
+  overflow: hidden;
+  transition: var(--LLCC-transition-01);
+  -webkit-transition: var(--LLCC-transition-01);
+  -moz-transition: var(--LLCC-transition-01);
+  -o-transition: var(--LLCC-transition-01);
+  ;
+}
+
+#selects-section.selects-section-shown {
+  height: 40px;
 }
 
 .select-options-div {
-  width: 100%;
+  width: 140px;
+  position: absolute;
+  height: 0px;
+  overflow: hidden;
+  z-index: 99;
+  transition: var(--LLCC-transition-01);
+}
+
+.select-options-div-shown {
+  height: 500px;
 }
 
 .select-opt-button {
@@ -53,7 +80,6 @@
   cursor: pointer;
   transition: var(--LLCC-transition-01);
 }
-
 .select-opt-button:hover {
   color: var(--LLCC-black);
 }

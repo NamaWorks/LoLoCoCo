@@ -114,6 +114,7 @@ const getRandomInteger = (min, max) => {
 const filterCategories = ['colors', 'orientation', 'sort by']
 const selectsSection = document.querySelector('#selects-section')
 const colors = [
+  'all',
   'black_and_white',
   'black',
   'white',
@@ -126,13 +127,12 @@ const colors = [
   'teal',
   'blue'
 ]
-const orientation = ['landscape', 'portrait', 'squarish']
+const orientation = ['all', 'landscape', 'portrait', 'squarish']
 const sortBy = ['relevant', 'latest']
 const printFilterCategories = (category, catOptions) => {
   let selectsSection = document.querySelector('#selects-section')
 
   let selectFilterContainer = document.createElement('div')
-  selectFilterContainer.classList.add('div')
   selectFilterContainer.classList.add('select-filter-container')
   selectsSection.append(selectFilterContainer)
 
@@ -180,3 +180,41 @@ const printRandomEmoji = (a, b) => {
   endEmoji.innerText = randomEmoji
 }
 printRandomEmoji(0, 8)
+
+const handleOpenFiltersButton = () => {
+  let selectsSection = document.querySelector('#selects-section')
+  const filters = document.querySelector('#filters')
+  let chevronIcon = filters.querySelector('.chevron-icon')
+  selectsSection.classList.toggle('selects-section-shown')
+  chevronIcon.classList.toggle('chevron-rotation')
+}
+const openFiltersButton = document.querySelector('#open-filters-button')
+openFiltersButton.addEventListener('click', handleOpenFiltersButton)
+
+const handleShowFiltersOptionsButtons = () => {
+  let allSelectSectionsShown = document.querySelectorAll(
+    '.select-section-shown'
+  )
+  console.log(allSelectSectionsShown)
+
+  let button = event.target
+
+  let chevron = button.querySelector('.chevron-icon')
+  chevron.classList.toggle('chevron-rotation')
+
+  let filterSelect = event.target.parentElement
+
+  let selectFilterContainer = filterSelect.parentElement
+  console.log(selectFilterContainer)
+
+  let selectOptionsDiv = selectFilterContainer.querySelector(
+    '.select-options-div'
+  )
+
+  selectOptionsDiv.classList.toggle('select-options-div-shown')
+}
+
+const categoryFilterButtons = filters.querySelectorAll('.category-filter')
+categoryFilterButtons.forEach((button) => {
+  button.addEventListener('click', handleShowFiltersOptionsButtons)
+})
