@@ -13,6 +13,9 @@ const accessKey = "n7epUiJjY2BrSI7FW1oJ33wh7q4XI7lsZZlxCBwRg3o";
 const searchInput = document.querySelector("#search-input");
 const picturesTimeline = document.querySelector("#pictures-timeline");
 
+import { getRandomInteger } from "./src/components/functions/math_functions/get-random-integer";
+import { printRandomEmoji } from "./src/components/functions/print-random-emoji/print-random-emoji";
+
 const handleEnter = (e) => {
   if (e.keyCode === 13) {
     resetTl();
@@ -75,8 +78,22 @@ const resetPageNumber = () => {
   pageNumber = 1;
 };
 let pageNumber = 1;
-const fetchImages = async (query = "coral color", n = 10, pageNumber) => {
-  console.log(query);
+const fetchImages = async (
+  query = "coral color",
+  color = "all",
+  orientation = "all",
+  orderBy = "relevant",
+  n = 10,
+  pageNumber
+) => {
+  let queryInput = `query = '${query}'`;
+  console.log(queryInput);
+  let colorInput = `color = '${color}'`;
+  console.log(colorInput);
+  let orientationInput = `orientation = '${orientation}'`;
+  console.log(orientationInput);
+  let orderByInput = `orderBy = '${orderBy}'`;
+  console.log(orderByInput);
   fetch(
     `${mainRoute}photos?query=${query}&page=${pageNumber}&per_page=${n}&client_id=${accessKey}`
   )
@@ -104,12 +121,6 @@ const addTenMorePictures = () => {
 };
 const showMoreButton = document.querySelector("#show-more-button");
 showMoreButton.addEventListener("click", addTenMorePictures);
-
-const getRandomInteger = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
 
 const filterCategories = ["colors", "orientation", "sort by"];
 const selectsSection = document.querySelector("#selects-section");
@@ -172,21 +183,19 @@ printFilterCategories("Colors", colors);
 printFilterCategories("Orientation", orientation);
 printFilterCategories("Sort", sortBy);
 
-const emojiArr = ["❤️", "🟥", "🔴", "☎️", "🎈", "📕", "🏮", "🩸", "❤️"];
-const printRandomEmoji = (a, b) => {
-  let randomI = getRandomInteger(a, b);
-  let randomEmoji = emojiArr[randomI];
-  const endEmoji = document.querySelector("#end-emoji");
-  endEmoji.innerText = randomEmoji;
-};
-printRandomEmoji(0, 8);
-
 const handleOpenFiltersButton = () => {
   let selectsSection = document.querySelector("#selects-section");
   const filters = document.querySelector("#filters");
   let chevronIcon = filters.querySelector(".chevron-icon");
   selectsSection.classList.toggle("selects-section-shown");
   chevronIcon.classList.toggle("chevron-rotation");
+
+  let allSelectOptionsDivShown = document.querySelectorAll(
+    ".select-options-div-shown"
+  );
+  allSelectOptionsDivShown.forEach((element) => {
+    element.classList.remove("select-options-div-shown");
+  });
 };
 const openFiltersButton = document.querySelector("#open-filters-button");
 openFiltersButton.addEventListener("click", handleOpenFiltersButton);
@@ -199,12 +208,14 @@ const handleShowFiltersOptionsButtons = () => {
   let selectOptionsDiv = selectFilterContainer.querySelector(
     ".select-options-div"
   );
+
   if (!selectOptionsDiv.classList.contains("select-options-div-shown")) {
-    chevron.classList.toggle("chevron-rotation");
-    selectOptionsDiv.classList.toggle("select-options-div-shown");
+    chevron.classList.add("chevron-rotation");
+    selectOptionsDiv.classList.add("select-options-div-shown");
   } else if (selectOptionsDiv.classList.contains("select-options-div-shown")) {
-    chevron.classList.toggle("chevron-rotation");
+    chevron.classList.remove("chevron-rotation");
     selectOptionsDiv.classList.remove("select-options-div-shown");
+    // we could use a classList.toggle() in this situation, but for testing reasons we'll use add and remove
   }
 };
 
@@ -218,7 +229,7 @@ const cleanClassFiltersOptionsButtons = () => {
 
   allSelectOptionsDivShown.forEach((element) => {
     element.classList.remove("select-options-div-shown");
-    chevron.classList.toggle("chevron-rotation");
+    chevron.classList.remove("chevron-rotation");
   });
 };
 
