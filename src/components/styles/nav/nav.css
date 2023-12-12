@@ -108,8 +108,3 @@ nav {
   }
 }
 
-@media (max-width:450px) {
-  h1 {
-    font-size: 3rem;
-  }
-}

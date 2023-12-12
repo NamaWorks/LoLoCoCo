@@ -143,26 +143,26 @@ categoryFilterButtons.forEach((button) => {
 });
 
 
-let selectOptButton = document.querySelectorAll(".select-opt")
+// let selectOptButton = document.querySelectorAll(".select-opt")
 
-const getSelectOptionClicked = () => {
-  let input = event.target.innerText
-  if (!input === 'all'){
-    if(colors.includes(input)) {
-      return `$color=${input}`
-    } else if (orientation.includes(input)) {
-      return `&orientation=${input}`
-    } else if (sortBy.includes(input)) {
-      return `$order_by=${input}`
-    } else {return}
-  } else {
-    console.log('cagaste weon')
-  }
+// const getSelectOptionClicked = () => {
+//   let input = event.target.innerText
+//   if (!input === 'all'){
+//     if(colors.includes(input)) {
+//       return `$color=${input}`
+//     } else if (orientation.includes(input)) {
+//       return `&orientation=${input}`
+//     } else if (sortBy.includes(input)) {
+//       return `$order_by=${input}`
+//     } else {return}
+//   } else {
+//     console.log('cagaste weon')
+//   }
   
-}
-selectOptButton.forEach(element => {
-  element.addEventListener('click', getSelectOptionClicked)
-});
+// }
+// selectOptButton.forEach(element => {
+//   element.addEventListener('click', getSelectOptionClicked)
+// });
 
 const showMenuMobile = () => {
   menuMobile.classList.toggle('nav-list-mobile-shown')
