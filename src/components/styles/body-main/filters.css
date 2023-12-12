@@ -83,3 +83,25 @@
 .select-opt-button:hover {
   color: var(--LLCC-black);
 }
+
+@media (max-width:650px) {
+  #selects-section {
+    display: flex;
+    flex-direction: column;
+    height: 0;
+    padding: 0;
+    justify-content: left;
+    /* gap: var(--LLCC-gap-02); */
+    overflow: hidden;
+    transition: var(--LLCC-transition-01);
+    -webkit-transition: var(--LLCC-transition-01);
+    -moz-transition: var(--LLCC-transition-01);
+    -o-transition: var(--LLCC-transition-01);
+    ;
+  }
+  
+  #selects-section.selects-section-shown {
+    height: 120px;
+    padding: 0 var(--LLCC-padding-selects-section);
+  }
+}
