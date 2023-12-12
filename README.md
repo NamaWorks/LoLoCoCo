@@ -22,3 +22,5 @@ Technologies used:
 
 ![Static Badge](https://img.shields.io/badge/WIP-%2371d7b2?style=flat&logo=javascript&logoColor=%2371d7b2&label=Nama%20Works&labelColor=%23303030)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d97375ac-2fc9-4973-9e66-0f160126abfb/deploy-status)](https://app.netlify.com/sites/lolococo/deploys)
+
