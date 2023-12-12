@@ -107,3 +107,9 @@ nav {
     color: var(--LLCC-white);
   }
 }
+
+@media (max-width:450px) {
+  h1 {
+    font-size: 3rem;
+  }
+}

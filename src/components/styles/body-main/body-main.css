@@ -97,3 +97,10 @@ h1::after {
   border-radius: 100%;
   overflow: hidden;
 }
+
+@media (max-width:450px) {
+  h1 {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+}
