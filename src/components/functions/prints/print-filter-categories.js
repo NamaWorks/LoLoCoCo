@@ -17,7 +17,7 @@ export const printFilterCategories = (category, catOptions) => {
 
   let chevronIcon = document.createElement("img");
   chevronIcon.src = "https://res.cloudinary.com/dgrhbsilh/image/upload/v1702339831/LoLoCoCo%C2%AE/chevron_loohvt.svg";
-  chevronIcon.alt = ">";
+  chevronIcon.alt = "^";
   chevronIcon.classList.add("chevron-icon");
   categoryFilter.append(chevronIcon);
 

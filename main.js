@@ -8,7 +8,8 @@ import "./src/components/styles/body-main/filters.css";
 const mainRoute = "https://api.unsplash.com/search/";
 const applicationId = "534651";
 const secretKey = "HLajwDcwMz81sQQf8U_VQtNs3hfZHGaAWmQCmtCynsg";
-const accessKey = "n7epUiJjY2BrSI7FW1oJ33wh7q4XI7lsZZlxCBwRg3o";
+const accessKey = 'n7epUiJjY2BrSI7FW1oJ33wh7q4XI7lsZZlxCBwRg3o'
+
 
 const searchInput = document.querySelector("#search-input");
 let pageNumber = 1
@@ -143,28 +144,17 @@ categoryFilterButtons.forEach((button) => {
 });
 
 
-// let selectOptButton = document.querySelectorAll(".select-opt")
+const selectOptButton = document.querySelectorAll(".select-opt")
 
-// const getSelectOptionClicked = () => {
-//   let input = event.target.innerText
-//   if (!input === 'all'){
-//     if(colors.includes(input)) {
-//       return `$color=${input}`
-//     } else if (orientation.includes(input)) {
-//       return `&orientation=${input}`
-//     } else if (sortBy.includes(input)) {
-//       return `$order_by=${input}`
-//     } else {return}
-//   } else {
-//     console.log('cagaste weon')
-//   }
-  
-// }
-// selectOptButton.forEach(element => {
-//   element.addEventListener('click', getSelectOptionClicked)
-// });
+const getSelectOptionClicked = () => {
+alert("this feature is still in proccess, sorry D:")
+}
+selectOptButton.forEach(element => {
+  element.addEventListener('click', getSelectOptionClicked)
+});
 
 const showMenuMobile = () => {
   menuMobile.classList.toggle('nav-list-mobile-shown')
 }
 menuButton.addEventListener('click', showMenuMobile)
+

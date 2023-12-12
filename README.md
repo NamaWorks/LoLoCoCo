@@ -2,7 +2,7 @@
 
 ## Hi! 👋🏼 Thanks for checking this project!
 
-![Alt text](image.png)
+![Alt text](src/assets/img/Porjetc-preview.png)
 
 This is an image filter page connected to Unsplash API using async JS, inspired in Pinterest.
 
