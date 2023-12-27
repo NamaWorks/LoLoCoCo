@@ -8,11 +8,10 @@ import "./src/components/styles/body-main/filters.css";
 const mainRoute = "https://api.unsplash.com/search/";
 const applicationId = "534651";
 const secretKey = "HLajwDcwMz81sQQf8U_VQtNs3hfZHGaAWmQCmtCynsg";
-const accessKey = 'n7epUiJjY2BrSI7FW1oJ33wh7q4XI7lsZZlxCBwRg3o'
-
+const accessKey = "n7epUiJjY2BrSI7FW1oJ33wh7q4XI7lsZZlxCBwRg3o";
 
 const searchInput = document.querySelector("#search-input");
-let pageNumber = 1
+let pageNumber = 1;
 const showMoreButton = document.querySelector("#show-more-button");
 const colors = [
   "all",
@@ -31,8 +30,8 @@ const colors = [
 const orientation = ["all", "landscape", "portrait", "squarish"];
 const sortBy = ["relevant", "latest"];
 const openFiltersButton = document.querySelector("#open-filters-button");
-const menuButton = document.querySelector('#menu-text')
-const menuMobile = document.querySelector('#nav-list-mobile')
+const menuButton = document.querySelector("#menu-text");
+const menuMobile = document.querySelector("#nav-list-mobile");
 
 import { getRandomInteger } from "./src/components/functions/math_functions/get-random-integer";
 import { printFilterCategories } from "./src/components/functions/prints/print-filter-categories";
@@ -40,7 +39,7 @@ import { printRandomEmoji } from "./src/components/functions/prints/print-random
 import { handleShowFiltersOptionsButtons } from "./src/components/functions/handle-functions/handle-show-filters-options-button";
 import { resetTl } from "./src/components/functions/resets/reset-timeline";
 import { handleOpenFiltersButton } from "./src/components/functions/handle-functions/handle-open-filters-button";
-
+import { imagesNotFound } from "./src/components/functions/notifications/no-images-found";
 
 const handleEnter = (e) => {
   if (e.keyCode === 13) {
@@ -98,7 +97,12 @@ const printImage = (image) => {
 };
 
 const fetchImages = async (
-  query = "coral color",n = 10, pageNumber, color = "all", orientation = "all", orderBy = "relevant", 
+  query = "coral color",
+  n = 10,
+  pageNumber,
+  color = "all",
+  orientation = "all",
+  orderBy = "relevant"
 ) => {
   fetch(
     `${mainRoute}photos?query=${query}&page=${pageNumber}&per_page=${n}&client_id=${accessKey}`
@@ -106,9 +110,13 @@ const fetchImages = async (
     .then((res) => res.json())
     .then((res) => {
       let resultsArray = res.results;
-      resultsArray.forEach((result) => {
-        printImage(result);
-      });
+      if (resultsArray.length > 0) {
+        resultsArray.forEach((result) => {
+          printImage(result);
+        });
+      } else {
+        imagesNotFound();
+      }
     })
     .catch((error) => console.log(`Fetch failed, check code`));
 };
@@ -116,7 +124,7 @@ fetchImages("coral color");
 
 const addTenMorePictures = () => {
   pageNumber++;
-  console.log(pageNumber)
+  console.log(pageNumber);
   if (searchInput.value) {
     fetchImages(searchInput.value, 10, pageNumber);
   } else {
@@ -124,17 +132,14 @@ const addTenMorePictures = () => {
   }
 };
 
-
 showMoreButton.addEventListener("click", addTenMorePictures);
 
 const filterCategories = ["colors", "orientation", "sort by"];
 const selectsSection = document.querySelector("#selects-section");
 
-
 printFilterCategories("Colors", colors);
 printFilterCategories("Orientation", orientation);
 printFilterCategories("Sort", sortBy);
-
 
 openFiltersButton.addEventListener("click", handleOpenFiltersButton);
 
@@ -143,18 +148,16 @@ categoryFilterButtons.forEach((button) => {
   button.addEventListener("click", handleShowFiltersOptionsButtons);
 });
 
-
-const selectOptButton = document.querySelectorAll(".select-opt")
+const selectOptButton = document.querySelectorAll(".select-opt");
 
 const getSelectOptionClicked = () => {
-alert("this feature is still in proccess, sorry D:")
-}
-selectOptButton.forEach(element => {
-  element.addEventListener('click', getSelectOptionClicked)
+  alert("this feature is still in proccess, sorry D:");
+};
+selectOptButton.forEach((element) => {
+  element.addEventListener("click", getSelectOptionClicked);
 });
 
 const showMenuMobile = () => {
-  menuMobile.classList.toggle('nav-list-mobile-shown')
-}
-menuButton.addEventListener('click', showMenuMobile)
-
+  menuMobile.classList.toggle("nav-list-mobile-shown");
+};
+menuButton.addEventListener("click", showMenuMobile);
